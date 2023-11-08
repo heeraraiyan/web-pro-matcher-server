@@ -9,9 +9,10 @@ const port = process.env.PORT || 5000;
 // middlerae 
 
 app.use(cors());
+
 app.use(express.json());
 
-
+const { ObjectId } = require('mongodb');
 
 
 
@@ -49,6 +50,27 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     })
+
+
+    app.get('/addJobs/:id', async(req,res) =>{
+      const id =req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await jobsCollection.findOne(query)
+      res.send(result);
+    })
+
+
+
+    // app.get('/addJobs_brand/:category', async(req,res)=>{
+    //   const category = req.params.category;
+    //   // console.log(brandName)
+    //   const query = {category: category};
+    //   const cursor = jobsCollection.find(query);
+    //   const result = await cursor.toArray();
+    //   // const result = await productCollection.findOne(query);
+    //   res.send(result);
+    // })
+
 
 
     app.post('/addJobs', async(req,res)=>{
