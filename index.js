@@ -42,6 +42,7 @@ async function run() {
 
     // const jobsCollection = client.db('webpro').collection('jobs');
     const jobsCollection = client.db('webJobs').collection('addJobs');
+    const bidCollection = client.db('webJobs').collection('bid');
     // const productCollection = client.db('productDB').collection('product');
 
     
@@ -77,6 +78,24 @@ async function run() {
       const newJobs = req.body;
       console.log(newJobs);
       const result = await jobsCollection.insertOne(newJobs);
+      res.send(result);
+    })
+
+
+
+    // bid related 
+
+
+    app.get('/bid', async(req, res)=>{
+      const cursor = bidCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    app.post('/bid',async(req, res) =>{
+      const userCart= req.body;
+      console.log(userCart);
+      const result = await bidCollection.insertOne(userCart);
       res.send(result);
     })
 
