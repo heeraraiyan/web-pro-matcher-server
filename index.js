@@ -49,7 +49,7 @@ async function run() {
     // const jobsCollection = client.db('webpro').collection('jobs');
     const jobsCollection = client.db('webJobs').collection('addJobs');
     const bidCollection = client.db('webJobs').collection('bid');
-    // const productCollection = client.db('productDB').collection('product');
+    
 
     
     app.get('/addJobs', async(req, res)=>{
