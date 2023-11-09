@@ -8,7 +8,12 @@ const port = process.env.PORT || 5000;
 
 // middlerae 
 
-app.use(cors());
+app.use(cors({
+  origin:[
+    'https://web-pro-matcher-client.web.app',
+    'https://web-pro-matcher-client.firebaseapp.com',
+  ]
+}));
 
 app.use(express.json());
 
@@ -37,7 +42,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
 
     // const jobsCollection = client.db('webpro').collection('jobs');
@@ -47,6 +52,13 @@ async function run() {
 
     
     app.get('/addJobs', async(req, res)=>{
+      const cursor = jobsCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
+    
+    app.get('/addJobs_own', async(req, res)=>{
       const cursor = jobsCollection.find();
       const result = await cursor.toArray();
       res.send(result);
@@ -80,6 +92,10 @@ async function run() {
       const result = await jobsCollection.insertOne(newJobs);
       res.send(result);
     })
+
+
+    
+    
 
 
 
