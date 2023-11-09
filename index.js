@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin:[
-    'http://localhost:5173',
+    // 'http://localhost:5173',
     'https://web-pro-matcher-client.web.app',
     'https://web-pro-matcher-client.firebaseapp.com',
   ]
