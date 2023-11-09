@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors({
   origin:[
+    'http://localhost:5173',
     'https://web-pro-matcher-client.web.app',
     'https://web-pro-matcher-client.firebaseapp.com',
   ]
@@ -92,6 +93,31 @@ async function run() {
       const result = await jobsCollection.insertOne(newJobs);
       res.send(result);
     })
+
+
+
+    
+    app.put('/addJobs/:id', async(req,res) => {
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const options = { upsert: true };
+      const updateJobs = req.body;
+      const job = {
+        $set: {
+          category: updateJobs.category,
+          job_title: updateJobs.job_title,
+          deadline: updateJobs.brand_name,
+          price_range: updateJobs.price_range,
+          short_description: updateJobs.short_description,
+          
+          
+        }
+      }
+
+      const result = await jobsCollection.updateOne(filter,job,options);
+      res.send(result);
+    })
+
 
 
     
