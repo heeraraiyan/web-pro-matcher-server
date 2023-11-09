@@ -75,15 +75,7 @@ async function run() {
 
 
 
-    // app.get('/addJobs_brand/:category', async(req,res)=>{
-    //   const category = req.params.category;
-    //   // console.log(brandName)
-    //   const query = {category: category};
-    //   const cursor = jobsCollection.find(query);
-    //   const result = await cursor.toArray();
-    //   // const result = await productCollection.findOne(query);
-    //   res.send(result);
-    // })
+    
 
 
 
